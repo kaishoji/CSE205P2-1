@@ -16,12 +16,15 @@ public class OnlineStudent extends Student {
   
   private boolean mTechFee;
 
-  public OnlineSudent() {
-    
+  public OnlineStudent() {
+
   }
+
 
   public OnlineStudent (String pId, String pFirstName, String pLastName){
     pId = mId;
+    pFirstName = mFirstName;
+    pLastName = mLastName;
   }
   
   @Override
@@ -32,6 +35,14 @@ public class OnlineStudent extends Student {
       t = t + TuitionConstants.ONLINE_TECH_FEE;
     }
     setTuition(t);
+  }
+  
+  public boolean getTechFee() {
+    return mTechFee;
+  }
+
+  public void setTechFee(boolean pTechFee) {
+    mTechFee = pTechFee;
   }
 
 }
