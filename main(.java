@@ -19,34 +19,28 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
 
-    /**
+public class Main
+{
+	/**
      * Instantiate a Main object and call run() on the object. Note that essentially now, run()
      * becomes the starting point of execution for the program.
      */
-    private void run() {
-      ArrayList<Student> studentList = new ArrayList<>(0);
-
-      try{
-        studentList = readFile("p2-students.txt");
-      } catch (FileNotFoundException)
-      {
-          System.out.println("Sorry, could not open 'p2-students.txt' for reading. Stopping.");
-        System.exit(-1);
-      }
-
-      public void calcTuition() {
-        
-      }
-    }
-
-    
+	public static void main(String[] args) throws FileNotFoundException
+	{		
+		Main mainObject = new Main();
+		mainObject.run();
+	}
 
     /**
      *  Calls other methods to implement the sw requirements.
      *
-
+     * PSEUDOCODE
+     * Declare ArrayList<Student> object named studentList and initialize it to null
+     *
+     * -- In the try-catch block we try to read the list of students from p2-students.txt
+     * -- storing the students in the studentList list. If we cannot open the input file for
+     * -- reading, then we output an error message and terminate the program.
      * try
      *     studentList = readFile()
      * catch (FileNotFoundException)
@@ -73,7 +67,34 @@ public class Main {
      *     Call System.exit(-1)
      * end try-catch
      */
-    ???
+    private void run() throws FileNotFoundException
+    {
+    	ArrayList<Student> studentList = new ArrayList<>();
+    	
+    	try
+    	{
+    		studentList = readFile("p2-students.txt");
+    	}
+    	catch (FileNotFoundException pException)//terminates the program if the file can not be found
+		  {
+			System.out.println("Sorry, could not open 'p2-students.txt' for reading. Stopping.");
+			System.exit(-1);
+		  }
+    	
+    	calcTuition(studentList);
+    		    	    	
+    	Sorter.insertionSort(studentList, Sorter.SORT_ASCENDING);
+    	
+    	try
+		  {
+			writeFile("p2-tuition.txt", studentList);
+		  }
+		  catch (FileNotFoundException pException)
+		  {
+			System.out.println("Sorry, could not open 'p2-tuition.txt' for writing. Stopping.");
+			System.exit(-1);
+		  }
+    }
 
     /**
      * Calculates the tuition for each Student in pStudentList. Write an enhanced for loop that
@@ -110,15 +131,24 @@ public class Main {
      * Close the scanner
      * Return studentList
      */
-    private ArrayList<Student> readFile(String pFile) throws FileNotFoundException {
-      File file = new File("p2-students.txt");
-      Scanner in = new Scanner(file);
-      ArrayList<Student> studentList = new ArrayList<Student>();
-      while (in.hasNext()) {
-        studentList.add(in.hasNext()); 
-      }
-      in.close();
-      return studentList;
+    private ArrayList<Student> readFile(String pFilename) throws FileNotFoundException
+    {
+    	ArrayList<Student> studentList = new ArrayList<>();
+    	Scanner in = new Scanner(new File(pFilename));
+    	while (in.hasNext())
+    	{
+    		String studentType;
+    		if (studentType.equals("C"))
+    		{
+    			studentList.add(readOnCampusStudent(in));
+    		}
+    		else
+    		{
+    			studentList.add(readOnlineStudent(in));
+    		}
+    	}
+    	in.close();
+    	return studentList;
     }
 
     /**
@@ -140,8 +170,28 @@ public class Main {
      * Call setProgramFee(fee) on student
      * Call setCredits(credits) on student
      * Return student
+     * 
      */
-    ???
+    private  ArrayList<Student> readOnCampusStudent(Scanner pIn)
+    {
+    	String id = pIn.next();
+    	String lname = pIn.next();
+    	String fname = pIn.next();
+    	//Declare and create an OnCampusStudent object. Pass id, fname, and lname as params to ctor.
+    	String res = pIn.next();
+    	double fee = pIn.nextDouble();
+    	int credits = pIn.nextInt();
+    	if (res.equals("R"))
+    	{
+    		Student.setResidency(onCampusStudent.RESIDENT);
+    	}
+    	else
+    	{
+    		Student.setResidency(onCampuStudent.NON_RESIDENT);
+    	}
+    	Student.setProgramFee(fee);
+    	Student.setCredits(credits);    	
+    }
 
     /**
      * Reads the information for an online student from the input file.
@@ -175,6 +225,15 @@ public class Main {
      * End Enhanced ForEach
      * Close the output file
      */
-    ???
+    private void writeFile(String pFilename, ArrayList<Integer> pStudentList) throws FileNotFoundException
+	{
+		PrintWriter out = new PrintWriter(new File(pFilename));
+		for(String : pStudentList)
+		{
+			out.printf()
+		}
+		out.close();
+	}
+
 
 }

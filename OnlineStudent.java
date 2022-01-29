@@ -8,23 +8,22 @@
 * CSE205 Object Oriented Programming and Data Structures, Spring 2022 Session A
 * Project Number: 2
 *
-* AUTHOR: your-name, your-asuriteid, your-email-addr ** Note: Include a second author line if
-* Author: Kai Ohsawa, Asurite ID: 1216436000, kaishoji.oh@gmail.com
-* Author: Tony Wen, Asurite ID: 1222943787, tewen@asu.edu
+* AUTHOR: Justin Fernandes, Asurite ID: 1223222572, jferna56@asu.edu
+* AUTHOR: Kai Ohsawa, Asurite ID: 121643600, kaishoji.oh@gmail.com
+* AUTHOR: Tony Wen, Asurite ID: 1222943787, tewen@asu.edu
 ******************************************************************************************************/
 public class OnlineStudent extends Student {
   
   private boolean mTechFee;
 
   public OnlineStudent() {
-
   }
 
 
-  public OnlineStudent (String pId, String pFirstName, String pLastName){
-    pId = mId;
-    pFirstName = mFirstName;
-    pLastName = mLastName;
+  public OnlineStudent (String pId, String pFirstName, String pLastName) { 
+    pId = getId();
+    pFirstName = getFirstName();
+    pLastName = getLastName();
   }
   
   @Override
